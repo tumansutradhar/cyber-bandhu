@@ -3,39 +3,87 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { UsersRound, Calendar, LogOut, BarChart } from "lucide-react";
+import { UsersRound, Calendar, LogOut, BarChart, AtSignIcon } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 const AdminDashboard = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(true);
     const navigate = useNavigate();
+    const [pendingServicesData, setPendingServicesData] = useState([]);
+    const [pendingQueryData, setPendingQueryData] = useState([]);
+    const [expert, setExpert] = useState([]);
 
-    // this would check for a valid auth token
+    const getPendingServices = async () => {
+        try {
+            const res = await fetch(`http://localhost:5000/service/pending`, {
+                headers: {
+                    // authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+                    authorization: `bearear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY4MDM0Y2VhYmFjNmFjZmU2M2FlZjE4ZiIsImVtYWlsIjoicmRzQHIuY29tIiwiZG9jIjpbXSwiaGlzdG9yeSI6W10sIl9fdiI6MCwiZGF0ZSI6IjIwMjUtMDQtMTlUMTU6Mjk6MjAuMTM0WiJ9LCJpYXQiOjE3NDUwNzY1NjAsImV4cCI6MTc0NTA4Mzc2MH0.XPGwHRzgX5G6nuwxYdNS6EngAKEqa0mS-Z9GXUakqg0`,
+                },
+            });
+            const data = await res.json();
+            if (data && Array.isArray(data)) {
+                setPendingServicesData(data);
+            } else {
+                setPendingServicesData([]);
+            }
+        } catch (err) {
+            console.error("Error fetching pending services:", err);
+        }
+    };
+    const getPendingQuery = async () => {
+        try {
+            const res = await fetch(`http://localhost:5000/query/pending`, {
+                headers: {
+                    // authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+                    authorization: `bearear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY4MDM0Y2VhYmFjNmFjZmU2M2FlZjE4ZiIsImVtYWlsIjoicmRzQHIuY29tIiwiZG9jIjpbXSwiaGlzdG9yeSI6W10sIl9fdiI6MCwiZGF0ZSI6IjIwMjUtMDQtMTlUMTU6Mjk6MjAuMTM0WiJ9LCJpYXQiOjE3NDUwNzY1NjAsImV4cCI6MTc0NTA4Mzc2MH0.XPGwHRzgX5G6nuwxYdNS6EngAKEqa0mS-Z9GXUakqg0`,
+                },
+            });
+            const data = await res.json();
+            if (data && Array.isArray(data)) {
+                setPendingQueryData(data);
+            } else {
+                setPendingQueryData([]);
+            }
+        } catch (err) {
+            console.error("Error fetching pending query:", err);
+        }
+    };
+
+    const getActiveExperts = async () => {
+        try {
+            const res = await fetch(`http://localhost:5000/expert/active`, {
+                headers: {
+                    // authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+                    authorization: `bearear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY4MDM0Y2VhYmFjNmFjZmU2M2FlZjE4ZiIsImVtYWlsIjoicmRzQHIuY29tIiwiZG9jIjpbXSwiaGlzdG9yeSI6W10sIl9fdiI6MCwiZGF0ZSI6IjIwMjUtMDQtMTlUMTU6Mjk6MjAuMTM0WiJ9LCJpYXQiOjE3NDUwNzY1NjAsImV4cCI6MTc0NTA4Mzc2MH0.XPGwHRzgX5G6nuwxYdNS6EngAKEqa0mS-Z9GXUakqg0`
+                },
+            });
+            const data = await res.json();
+            if (data && Array.isArray(data)) {
+                setExpert(data);
+            } else {
+                setExpert([]);
+            }
+        } catch (err) {
+            console.error("Error fetching active experts:", err);
+        }
+    };
+
     useEffect(() => {
-        // we're just checking if the user navigated here properly
-        // you would validate authentication status here
+        getPendingServices();
+        getActiveExperts();
+        getPendingQuery();
     }, []);
 
     const handleLogout = () => {
         setIsAuthenticated(false);
-        navigate("/admin");
+        navigate("/admin/login");
     };
 
-    const bookings = [
-        { id: 1, name: "Rahul Sharma", service: "Form Filling", date: "2024-04-18", status: "Confirmed", },
-        { id: 2, name: "Priya Patel", service: "College Admissions", date: "2024-04-19", status: "Pending", },
-        { id: 3, name: "Amit Kumar", service: "Scholarship Application", date: "2024-04-20", status: "Confirmed", },
-        { id: 4, name: "Sneha Gupta", service: "Digital Safety", date: "2024-04-21", status: "Cancelled", },
-        { id: 5, name: "Vikram Singh", service: "Form Filling", date: "2024-04-22", status: "Confirmed", },
-    ];
-
-    const assistants = [
-        { id: 1, name: "Ravi Kumar", area: "Jaipur", bookings: 12, rating: 4.8 },
-        { id: 2, name: "Sonia Verma", area: "Udaipur", bookings: 8, rating: 4.7 },
-        { id: 3, name: "Deepak Sharma", area: "Jodhpur", bookings: 15, rating: 4.9, },
-        { id: 4, name: "Nisha Patel", area: "Kota", bookings: 10, rating: 4.6 },
-        { id: 5, name: "Arjun Singh", area: "Bikaner", bookings: 7, rating: 4.8 },
-    ];
+    const handleService = () => {
+        setIsAuthenticated(false);
+        navigate("/book-service");
+    };
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -48,6 +96,9 @@ const AdminDashboard = () => {
                         </div>
                         <span className="ml-4 text-sm bg-gray-200 px-2 py-1 rounded">Admin Panel</span>
                     </div>
+                    <Button variant="ghost" size="sm" onClick={handleService}>
+                        <AtSignIcon className="h-4 w-4 mr-2" />Book Service
+                    </Button>
                     <Button variant="ghost" size="sm" onClick={handleLogout}>
                         <LogOut className="h-4 w-4 mr-2" />Logout
                     </Button>
@@ -89,8 +140,9 @@ const AdminDashboard = () => {
                 </div>
                 <Tabs defaultValue="bookings" className="mb-6">
                     <TabsList className="mb-4">
-                        <TabsTrigger value="bookings">Recent Bookings</TabsTrigger>
-                        <TabsTrigger value="assistants">Digital Assistants</TabsTrigger>
+                        <TabsTrigger value="bookings">Pending Services</TabsTrigger>
+                        <TabsTrigger value="query">Pending Query</TabsTrigger>
+                        <TabsTrigger value="assistants">Digital Experts</TabsTrigger>
                     </TabsList>
                     <TabsContent value="bookings">
                         <Card>
@@ -104,23 +156,149 @@ const AdminDashboard = () => {
                                             <thead>
                                                 <tr className="border-b">
                                                     <th className="py-2 text-left font-medium">Name</th>
+                                                    <th className="py-2 text-left font-medium">Mobile</th>
+                                                    <th className="py-2 text-left font-medium">Email</th>
                                                     <th className="py-2 text-left font-medium">Service</th>
+                                                    <th className="py-2 text-left font-medium">Description</th>
+                                                    <th className="py-2 text-left font-medium">Address</th>
                                                     <th className="py-2 text-left font-medium">Date</th>
                                                     <th className="py-2 text-left font-medium">Status</th>
                                                     <th className="py-2 text-left font-medium">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {bookings.map((booking) => (
+                                                {pendingServicesData.map((booking) => (
                                                     <tr key={booking.id} className="border-b">
-                                                        <td className="py-2">{booking.name}</td>
-                                                        <td className="py-2">{booking.service}</td>
+                                                        <td className="py-2">{booking.user_name}</td>
+                                                        <td className="py-2">{booking.mobile_no}</td>
+                                                        <td className="py-2">{booking.email}</td>
+                                                        <td className="py-2">{booking.service_name}</td>
+                                                        <td className="py-2">{booking.service_des}</td>
+                                                        <td className="py-2">{booking.address}</td>
                                                         <td className="py-2">{booking.date}</td>
                                                         <td className="py-2">
                                                             <span className={`px-2 py-1 rounded-full text-xs ${booking.status === "Confirmed" ? "bg-green-100 text-green-800" : booking.status === "Pending" ? "bg-yellow-100 text-yellow-800" : "bg-red-100 text-red-800"}`}>{booking.status}</span>
                                                         </td>
                                                         <td className="py-2">
-                                                            <Button variant="link" size="sm">View Details</Button>
+                                                            <form
+                                                                onSubmit={async (e) => {
+                                                                    e.preventDefault();
+                                                                    const newStatus = e.target.elements.status.value;
+                                                                    try {
+                                                                        const res = await fetch(`http://localhost:5000/service/update/${booking._id}`, {
+                                                                            method: "PUT",
+                                                                            headers: {
+                                                                                "Content-Type": "application/json",
+                                                                                authorization: `bearer ${localStorage.getItem("token")}`,
+                                                                                // authorization: `bearear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY4MDM0Y2VhYmFjNmFjZmU2M2FlZjE4ZiIsImVtYWlsIjoicmRzQHIuY29tIiwiZG9jIjpbXSwiaGlzdG9yeSI6W10sIl9fdiI6MCwiZGF0ZSI6IjIwMjUtMDQtMTlUMTI6MzU6MDAuMTMyWiJ9LCJpYXQiOjE3NDUwNjYxMDAsImV4cCI6MTc0NTA3MzMwMH0.mtgRmBD18O2VHSpPv10TVDTSLYl5pksDIMf_Ngm1vWQ`
+                                                                            },
+                                                                            body: JSON.stringify({ status: newStatus }),
+                                                                        });
+                                                                        const result = await res.json();
+                                                                        if (result.success) {
+                                                                            getPendingServices();
+                                                                        }
+                                                                    } catch (err) {
+                                                                        console.error("Error updating status:", err);
+                                                                    }
+                                                                }}
+                                                            >
+                                                                <select
+                                                                    name="status"
+                                                                    defaultValue={booking.status}
+                                                                    className="text-xs border rounded px-2 py-1"
+                                                                >
+                                                                    <option value="pending">Pending</option>
+                                                                    <option value="done">Done</option>
+                                                                    <option value="rejected">Rejected</option>
+                                                                </select>
+                                                                <button type="submit" className="ml-2 text-blue-600 text-xs underline">
+                                                                    Update
+                                                                </button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </ScrollArea>
+                            </CardContent>
+                        </Card>
+                    </TabsContent>
+                    <TabsContent value="query">
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Pending Query</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <ScrollArea className="h-[300px]">
+                                    <div className="overflow-x-auto">
+                                        <table className="w-full text-sm">
+                                            <thead>
+                                                <tr className="border-b">
+                                                    <th className="py-2 text-left font-medium">Name</th>
+                                                    <th className="py-2 text-left font-medium">Mobile</th>
+                                                    <th className="py-2 text-left font-medium">Email</th>
+                                                    <th className="py-2 text-left font-medium">Subject</th>
+                                                    <th className="py-2 text-left font-medium">Message</th>
+                                                    <th className="py-2 text-left font-medium">Date</th>
+                                                    <th className="py-2 text-left font-medium">Status</th>
+                                                    <th className="py-2 text-left font-medium">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {pendingQueryData.map((booking) => (
+                                                    <tr key={booking.id} className="border-b">
+                                                        <td className="py-2">{booking.f_name + " " + booking.l_name}</td>
+                                                        <td className="py-2">{booking.mobile_no}</td>
+                                                        <td className="py-2">{booking.email}</td>
+                                                        <td className="py-2">{booking.query_name}</td>
+                                                        <td className="py-2">{booking.query_des}</td>
+                                                        <td className="py-2">{booking.date}</td>
+                                                        <td className="py-2">
+                                                            <span
+                                                                className={`px-2 py-1 rounded-full text-xs ${booking.status === "Confirmed"
+                                                                    ? "bg-green-100 text-green-800"
+                                                                    : booking.status === "Pending"
+                                                                        ? "bg-yellow-100 text-yellow-800"
+                                                                        : "bg-red-100 text-red-800"
+                                                                    }`}
+                                                            >
+                                                                {booking.status}
+                                                            </span>
+                                                        </td>
+                                                        <td className="py-2">
+                                                            <form
+                                                                onSubmit={async (e) => {
+                                                                    e.preventDefault();
+                                                                    const newStatus = e.target.elements.status.value;
+                                                                    try {
+                                                                        const res = await fetch(`http://localhost:5000/query/update/${booking._id}`, {
+                                                                            method: "PUT",
+                                                                            headers: {
+                                                                                "Content-Type": "application/json",
+                                                                                authorization: `bearer ${localStorage.getItem("token")}`,
+                                                                                // authorization: `bearear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY4MDM0Y2VhYmFjNmFjZmU2M2FlZjE4ZiIsImVtYWlsIjoicmRzQHIuY29tIiwiZG9jIjpbXSwiaGlzdG9yeSI6W10sIl9fdiI6MCwiZGF0ZSI6IjIwMjUtMDQtMTlUMTI6MzU6MDAuMTMyWiJ9LCJpYXQiOjE3NDUwNjYxMDAsImV4cCI6MTc0NTA3MzMwMH0.mtgRmBD18O2VHSpPv10TVDTSLYl5pksDIMf_Ngm1vWQ`
+                                                                            },
+                                                                            body: JSON.stringify({ status: newStatus }),
+                                                                        });
+                                                                        const result = await res.json();
+                                                                        if (result.success) {
+                                                                            getPendingQuery();
+                                                                        }
+                                                                    } catch (err) {
+                                                                        console.error("Error updating query status:", err);
+                                                                    }
+                                                                }}
+                                                            >
+                                                                <select name="status" defaultValue={booking.status} className="text-xs border rounded px-2 py-1">
+                                                                    <option value="pending">Pending</option>
+                                                                    <option value="done">Resolved</option>
+                                                                    <option value="rejected">Rejected</option>
+                                                                </select>
+                                                                <button type="submit" className="ml-2 text-blue-600 text-xs underline">Update</button>
+                                                            </form>
                                                         </td>
                                                     </tr>
                                                 ))}
@@ -144,17 +322,25 @@ const AdminDashboard = () => {
                                                 <tr className="border-b">
                                                     <th className="py-2 text-left font-medium">Name</th>
                                                     <th className="py-2 text-left font-medium">Area</th>
-                                                    <th className="py-2 text-left font-medium">Bookings</th>
+                                                    <th className="py-2 text-left font-medium">Email</th>
+                                                    <th className="py-2 text-left font-medium">Mobile</th>
+                                                    <th className="py-2 text-left font-medium">Gender</th>
+                                                    <th className="py-2 text-left font-medium">Verified</th>
+                                                    <th className="py-2 text-left font-medium">Certified</th>
                                                     <th className="py-2 text-left font-medium">Rating</th>
                                                     <th className="py-2 text-left font-medium">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {assistants.map((assistant) => (
+                                                {expert.map((assistant) => (
                                                     <tr key={assistant.id} className="border-b">
                                                         <td className="py-2">{assistant.name}</td>
-                                                        <td className="py-2">{assistant.area}</td>
-                                                        <td className="py-2">{assistant.bookings}</td>
+                                                        <td className="py-2">{assistant.address}</td>
+                                                        <td className="py-2">{assistant.email}</td>
+                                                        <td className="py-2">{assistant.mobile_no}</td>
+                                                        <td className="py-2">{assistant.gender}</td>
+                                                        <td className="py-2">{assistant.verified.toString()}</td>
+                                                        <td className="py-2">{assistant.certified.toString()}</td>
                                                         <td className="py-2">
                                                             <div className="flex items-center">
                                                                 <span className="text-yellow-500">★</span>
