@@ -21,7 +21,6 @@ const Contact = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-
   const collectData = async (e) => {
     e.preventDefault();
     if (!f_name || !l_name || !mobile_no || !email || !query_name || !query_des || !t_c) {
@@ -140,7 +139,6 @@ const Contact = () => {
                             <a href="#" className="text-primary-600 hover:text-primary-500">Privacy Policy</a>
                           </label>
                         </div>
-
                       </div>
                       {error && !t_c && <span className="text-red-500">Checked Terms and Condition</span>}
                     </div>

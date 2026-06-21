@@ -1,119 +1,120 @@
-# Project Title: **Affordable & Secure Doorstep Digital Assistance for Students**
+# Cyber Bandhu | Doorstep Digital Assistance for Students
 
----
+Community-driven platform connecting rural students with trusted local digital experts for form-filling, scholarship applications, and online services—bridging the digital divide with affordable doorstep support.
 
-## Project Description  
+## About The Project
 
-In many **rural and semi-urban areas**, students who have completed their **10th or 12th standard** face significant challenges in accessing and filling out essential **online forms**, such as:
+Cyber Bandhu addresses digital barriers faced by students in rural and semi-urban areas. Students post requests for help with college admissions, scholarships, exam registrations, or job applications; verified local student experts visit their homes to provide form-filling, payment assistance, and career guidance. The platform reduces dependency on distant or fraudulent cyber cafés, ensures transparency through ratings and tracking, and empowers local youth with part-time earning opportunities.
 
-- College admission applications  
-- Scholarship applications  
-- Competitive entrance exam registrations  
-- Job applications  
-- Government scheme enrollments  
+## Built With
 
-These challenges arise due to:
+- Frontend: React 18 + TypeScript, Vite, React Router, Tailwind CSS, shadcn/ui (Radix UI), TanStack Query, React Hook Form + Zod, Recharts, Next Themes
+- Backend: Node.js, Express 5, MongoDB (Mongoose), JWT, CORS
+- Payments: Razorpay / UPI Integration (planned)
 
-- Limited digital literacy  
-- Lack of access to smartphones, laptops, or internet connectivity  
-- Cyber cafés being located far away (2-3 km or more)  
-- Misinformation, overcharging, or scams at cyber cafés  
+## Getting Started
 
-As a result, many students either make mistakes, miss important deadlines, or fall victim to fraudulent practices.
+### Prerequisites
 
----
+- Node.js 16+
+- npm
+- MongoDB running locally (or remote connection)
 
-## Our Solution  
+### Backend Setup
 
-We offer a **community-driven web and mobile platform** that enables students to request **doorstep digital assistance** for various tasks related to education and government services.
+```bash
+cd backend
+npm install
+# Configure .env with MongoDB URI and JWT secret
+node index.js               # or: npx nodemon index.js
+```
 
-### How it works:
+Update `db/` connection files if using a remote MongoDB instance.
 
-1. **Request Support:**  
-   Students or their parents can raise a help request via the mobile app or website.
+### Frontend Setup
 
-2. **Expert Assignment:**  
-   A **digitally skilled local student** is assigned as an expert to visit the student's home and provide help with the required task.
+```bash
+cd frontend
+npm install
+npm run dev                 # Vite dev server
+```
 
-3. **Form-Filling & Guidance:**  
-   The expert helps in filling out forms, making payments (if required), tracking application status, and offering career or college guidance.
+Open [http://localhost:5173](http://localhost:5173) (default Vite port).
 
-4. **Feedback & Transparency:**  
-   After completion, users can rate the service and view a full summary of the assistance provided.
+## Usage
 
----
+- Students/Parents: Create requests for digital assistance (college forms, scholarship applications, exam registrations), track request status, view assigned expert profiles, rate and review completed services.
+- Local Experts: Register as digitally skilled volunteers, accept requests, visit homes for doorstep assistance, help with form-filling and payments, build community reputation through feedback.
+- Admin/Platform: Verify expert credentials, monitor service quality, manage user reports, ensure secure payments and data privacy.
 
-## Key Features  
+## Features
 
-- **User-Friendly Interface:**  
-  Mobile and web platform with simple, localized UI for easy access.
+- Request-based doorstep service model (no travel required for students)
+- Trusted local expert verification and assignment
+- Real-time tracking and progress monitoring
+- Affordable pricing with transparent payment flows (Razorpay/UPI)
+- Ratings, reviews, and service summaries for accountability
+- Secure data handling (MongoDB, JWT auth)
+- Responsive UI with shadcn/ui components and Tailwind CSS
+- Dark/light theme support via Next Themes
 
-- **Doorstep Assistance:**  
-  No need to travel—help comes to the student's home.
+## Project Structure
 
-- **Trusted Local Experts:**  
-  Verified student volunteers trained in digital services from the same locality.
+```text
+cyber-bandhu/
+├─ backend/
+│  ├─ db/              # MongoDB connection and models
+│  ├─ index.js         # Express app and routes
+│  ├─ .env             # Environment config (MongoDB URI, JWT secret)
+│  └─ package.json
+├─ frontend/
+│  ├─ src/
+│  │  ├─ components/   # shadcn/ui components (buttons, forms, dialogs, etc.)
+│  │  ├─ pages/        # Route pages (home, requests, expert dashboard, profile)
+│  │  ├─ hooks/        # Custom React hooks
+│  │  ├─ lib/          # Utilities (Tailwind cn, API clients)
+│  │  └─ App.tsx
+│  ├─ components.json  # shadcn/ui config
+│  ├─ vite.config.ts
+│  └─ package.json
+├─ LICENSE.md
+└─ README.md
+```
 
-- **Affordable & Transparent:**  
-  Low-cost services with secure payments (Razorpay, UPI) and no hidden charges.
+## Scripts
 
-- **Real-Time Tracking:**  
-  Users can track their requests, view expert profiles, and monitor progress.
+- Backend: `node index.js` (or `npx nodemon index.js` for auto-reload)
+- Frontend: `npm run dev`, `npm run build`, `npm run build:dev`, `npm run preview`
 
-- **Secure & Private:**  
-  All data is encrypted and stored securely. No third-party access is allowed.
+## Roadmap
 
----
+- Integrate Razorpay/UPI payment flows
+- Add mobile app (React Native) for broader reach
+- Implement geolocation-based expert matching
+- Add multilingual support for rural communities
+- Launch Cyber-bandhu awareness campaigns and digital literacy workshops
+- Scale to multiple regions and partner with schools/NGOs
 
-## Societal Impact  
+## Contributing
 
-- **Bridges the Digital Divide:**  
-  Helps underserved students get equal access to online opportunities.
+Contributions are welcome. Please open an issue to discuss proposed changes before submitting a PR.
 
-- **Reduces Dependency on Cyber Cafés:**  
-  Ensures safe and trustworthy service at home.
+## License
 
-- **Empowers Youth:**  
-  Creates part-time earning opportunities for local digitally skilled students.
+See [LICENSE.md](LICENSE.md) for details.
 
-- **Promotes Digital Awareness:**  
-  Organizes workshops and builds awareness through “Cyber-bandhu” campaigns.
+## Contact
 
-- **Boosts Education & Employment Access:**  
-  Assists students in applying for colleges, scholarships, jobs, and exams without hassle.
+Tuman Sutradhar
 
----
+- GitHub: [https://github.com/tumansutradhar](https://github.com/tumansutradhar)
+- Email: [connect.tuman@gmail.com](mailto:connect.tuman@gmail.com)
+- LinkedIn: [https://www.linkedin.com/in/tumansutradhar/](https://www.linkedin.com/in/tumansutradhar/)
 
-## Technology Stack  
+Project Link: [https://github.com/tumansutradhar/cyber-bandhu](https://github.com/tumansutradhar/cyber-bandhu)
 
-### Web Platform:
-- **Frontend:** React.js + Tailwind CSS  
-- **Backend:** Node.js + Express.js  
-- **Database:** MongoDB  
-- **Authentication:** Clerk  
-- **Payments:** Razorpay, UPI Integration  
+## Acknowledgments
 
-### Mobile App:
-- **Frontend:** React Native  
-- **Backend:** Node.js  
-- **Payments:** Razorpay, UPI Integration  
-
----
-
-## Estimated Budget  
-**₹5 - ₹7 Lakhs** (for development, training, promotion, and operations)
-
----
-
-## Target Users  
-- Students from **rural and semi-urban** backgrounds  
-- Parents of students who need digital assistance  
-- Schools or local communities looking to provide support to students  
-
----
-
-## Vision  
-
-To create an inclusive, transparent, and secure digital ecosystem that empowers every student—regardless of location or background—to access opportunities and resources online with confidence and support.
-
-
+- React, Vite, shadcn/ui, and Tailwind CSS communities
+- Express, Mongoose, and JWT docs
+- Community members supporting digital inclusion initiatives

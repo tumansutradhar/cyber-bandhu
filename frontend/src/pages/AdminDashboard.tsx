@@ -13,67 +13,66 @@ const AdminDashboard = () => {
     const [pendingQueryData, setPendingQueryData] = useState([]);
     const [expert, setExpert] = useState([]);
 
-const getPendingServices = async () => {
-  try {
-    const res = await fetch(`http://localhost:5000/service/pending`, {
-      headers: {
-        // authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
-        authorization: `bearear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY4MDM0Y2VhYmFjNmFjZmU2M2FlZjE4ZiIsImVtYWlsIjoicmRzQHIuY29tIiwiZG9jIjpbXSwiaGlzdG9yeSI6W10sIl9fdiI6MCwiZGF0ZSI6IjIwMjUtMDQtMTlUMTU6Mjk6MjAuMTM0WiJ9LCJpYXQiOjE3NDUwNzY1NjAsImV4cCI6MTc0NTA4Mzc2MH0.XPGwHRzgX5G6nuwxYdNS6EngAKEqa0mS-Z9GXUakqg0`,
-      },
-    });
-    const data = await res.json();
-    if (data && Array.isArray(data)) {
-      setPendingServicesData(data);
-    } else {
-      setPendingServicesData([]);
-    }
-  } catch (err) {
-    console.error("Error fetching pending services:", err);
-  }
-};
-const getPendingQuery = async () => {
-  try {
-    const res = await fetch(`http://localhost:5000/query/pending`, {
-      headers: {
-        // authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
-        authorization: `bearear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY4MDM0Y2VhYmFjNmFjZmU2M2FlZjE4ZiIsImVtYWlsIjoicmRzQHIuY29tIiwiZG9jIjpbXSwiaGlzdG9yeSI6W10sIl9fdiI6MCwiZGF0ZSI6IjIwMjUtMDQtMTlUMTU6Mjk6MjAuMTM0WiJ9LCJpYXQiOjE3NDUwNzY1NjAsImV4cCI6MTc0NTA4Mzc2MH0.XPGwHRzgX5G6nuwxYdNS6EngAKEqa0mS-Z9GXUakqg0`,
-      },
-    });
-    const data = await res.json();
-    if (data && Array.isArray(data)) {
-      setPendingQueryData(data);
-    } else {
-        setPendingQueryData([]);
-    }
-  } catch (err) {
-    console.error("Error fetching pending query:", err);
-  }
-};
+    const getPendingServices = async () => {
+        try {
+            const res = await fetch(`http://localhost:5000/service/pending`, {
+                headers: {
+                    // authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+                    authorization: `bearear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY4MDM0Y2VhYmFjNmFjZmU2M2FlZjE4ZiIsImVtYWlsIjoicmRzQHIuY29tIiwiZG9jIjpbXSwiaGlzdG9yeSI6W10sIl9fdiI6MCwiZGF0ZSI6IjIwMjUtMDQtMTlUMTU6Mjk6MjAuMTM0WiJ9LCJpYXQiOjE3NDUwNzY1NjAsImV4cCI6MTc0NTA4Mzc2MH0.XPGwHRzgX5G6nuwxYdNS6EngAKEqa0mS-Z9GXUakqg0`,
+                },
+            });
+            const data = await res.json();
+            if (data && Array.isArray(data)) {
+                setPendingServicesData(data);
+            } else {
+                setPendingServicesData([]);
+            }
+        } catch (err) {
+            console.error("Error fetching pending services:", err);
+        }
+    };
+    const getPendingQuery = async () => {
+        try {
+            const res = await fetch(`http://localhost:5000/query/pending`, {
+                headers: {
+                    // authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+                    authorization: `bearear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY4MDM0Y2VhYmFjNmFjZmU2M2FlZjE4ZiIsImVtYWlsIjoicmRzQHIuY29tIiwiZG9jIjpbXSwiaGlzdG9yeSI6W10sIl9fdiI6MCwiZGF0ZSI6IjIwMjUtMDQtMTlUMTU6Mjk6MjAuMTM0WiJ9LCJpYXQiOjE3NDUwNzY1NjAsImV4cCI6MTc0NTA4Mzc2MH0.XPGwHRzgX5G6nuwxYdNS6EngAKEqa0mS-Z9GXUakqg0`,
+                },
+            });
+            const data = await res.json();
+            if (data && Array.isArray(data)) {
+                setPendingQueryData(data);
+            } else {
+                setPendingQueryData([]);
+            }
+        } catch (err) {
+            console.error("Error fetching pending query:", err);
+        }
+    };
 
-const getActiveExperts = async () => {
-  try {
-    const res = await fetch(`http://localhost:5000/expert/active`, {
-      headers: {
-        // authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
-        authorization: `bearear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY4MDM0Y2VhYmFjNmFjZmU2M2FlZjE4ZiIsImVtYWlsIjoicmRzQHIuY29tIiwiZG9jIjpbXSwiaGlzdG9yeSI6W10sIl9fdiI6MCwiZGF0ZSI6IjIwMjUtMDQtMTlUMTU6Mjk6MjAuMTM0WiJ9LCJpYXQiOjE3NDUwNzY1NjAsImV4cCI6MTc0NTA4Mzc2MH0.XPGwHRzgX5G6nuwxYdNS6EngAKEqa0mS-Z9GXUakqg0`
-      },
-    });
-    const data = await res.json();
-    if (data && Array.isArray(data)) {
-      setExpert(data);
-    } else {
-      setExpert([]);
-    }
-  } catch (err) {
-    console.error("Error fetching active experts:", err);
-  }
-};
-
+    const getActiveExperts = async () => {
+        try {
+            const res = await fetch(`http://localhost:5000/expert/active`, {
+                headers: {
+                    // authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+                    authorization: `bearear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY4MDM0Y2VhYmFjNmFjZmU2M2FlZjE4ZiIsImVtYWlsIjoicmRzQHIuY29tIiwiZG9jIjpbXSwiaGlzdG9yeSI6W10sIl9fdiI6MCwiZGF0ZSI6IjIwMjUtMDQtMTlUMTU6Mjk6MjAuMTM0WiJ9LCJpYXQiOjE3NDUwNzY1NjAsImV4cCI6MTc0NTA4Mzc2MH0.XPGwHRzgX5G6nuwxYdNS6EngAKEqa0mS-Z9GXUakqg0`
+                },
+            });
+            const data = await res.json();
+            if (data && Array.isArray(data)) {
+                setExpert(data);
+            } else {
+                setExpert([]);
+            }
+        } catch (err) {
+            console.error("Error fetching active experts:", err);
+        }
+    };
 
     useEffect(() => {
         getPendingServices();
-  getActiveExperts();
-  getPendingQuery();
+        getActiveExperts();
+        getPendingQuery();
     }, []);
 
     const handleLogout = () => {
@@ -85,7 +84,6 @@ const getActiveExperts = async () => {
         setIsAuthenticated(false);
         navigate("/book-service");
     };
-
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -171,7 +169,7 @@ const getActiveExperts = async () => {
                                             <tbody>
                                                 {pendingServicesData.map((booking) => (
                                                     <tr key={booking.id} className="border-b">
-                                                        <td className="py-2">{booking.user_name }</td>
+                                                        <td className="py-2">{booking.user_name}</td>
                                                         <td className="py-2">{booking.mobile_no}</td>
                                                         <td className="py-2">{booking.email}</td>
                                                         <td className="py-2">{booking.service_name}</td>
@@ -182,42 +180,42 @@ const getActiveExperts = async () => {
                                                             <span className={`px-2 py-1 rounded-full text-xs ${booking.status === "Confirmed" ? "bg-green-100 text-green-800" : booking.status === "Pending" ? "bg-yellow-100 text-yellow-800" : "bg-red-100 text-red-800"}`}>{booking.status}</span>
                                                         </td>
                                                         <td className="py-2">
-                                                        <form
-        onSubmit={async (e) => {
-          e.preventDefault();
-          const newStatus = e.target.elements.status.value;
-          try {
-            const res = await fetch(`http://localhost:5000/service/update/${booking._id}`, {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-                authorization: `bearer ${localStorage.getItem("token")}`,
-                // authorization: `bearear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY4MDM0Y2VhYmFjNmFjZmU2M2FlZjE4ZiIsImVtYWlsIjoicmRzQHIuY29tIiwiZG9jIjpbXSwiaGlzdG9yeSI6W10sIl9fdiI6MCwiZGF0ZSI6IjIwMjUtMDQtMTlUMTI6MzU6MDAuMTMyWiJ9LCJpYXQiOjE3NDUwNjYxMDAsImV4cCI6MTc0NTA3MzMwMH0.mtgRmBD18O2VHSpPv10TVDTSLYl5pksDIMf_Ngm1vWQ`
-              },
-              body: JSON.stringify({ status: newStatus }),
-            });
-            const result = await res.json();
-            if (result.success) {
-              getPendingServices();
-            }
-          } catch (err) {
-            console.error("Error updating status:", err);
-          }
-        }}
-      >
-        <select
-          name="status"
-          defaultValue={booking.status}
-          className="text-xs border rounded px-2 py-1"
-        >
-          <option value="pending">Pending</option>
-          <option value="done">Done</option>
-          <option value="rejected">Rejected</option>
-        </select>
-        <button type="submit" className="ml-2 text-blue-600 text-xs underline">
-          Update
-        </button>
-      </form>
+                                                            <form
+                                                                onSubmit={async (e) => {
+                                                                    e.preventDefault();
+                                                                    const newStatus = e.target.elements.status.value;
+                                                                    try {
+                                                                        const res = await fetch(`http://localhost:5000/service/update/${booking._id}`, {
+                                                                            method: "PUT",
+                                                                            headers: {
+                                                                                "Content-Type": "application/json",
+                                                                                authorization: `bearer ${localStorage.getItem("token")}`,
+                                                                                // authorization: `bearear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY4MDM0Y2VhYmFjNmFjZmU2M2FlZjE4ZiIsImVtYWlsIjoicmRzQHIuY29tIiwiZG9jIjpbXSwiaGlzdG9yeSI6W10sIl9fdiI6MCwiZGF0ZSI6IjIwMjUtMDQtMTlUMTI6MzU6MDAuMTMyWiJ9LCJpYXQiOjE3NDUwNjYxMDAsImV4cCI6MTc0NTA3MzMwMH0.mtgRmBD18O2VHSpPv10TVDTSLYl5pksDIMf_Ngm1vWQ`
+                                                                            },
+                                                                            body: JSON.stringify({ status: newStatus }),
+                                                                        });
+                                                                        const result = await res.json();
+                                                                        if (result.success) {
+                                                                            getPendingServices();
+                                                                        }
+                                                                    } catch (err) {
+                                                                        console.error("Error updating status:", err);
+                                                                    }
+                                                                }}
+                                                            >
+                                                                <select
+                                                                    name="status"
+                                                                    defaultValue={booking.status}
+                                                                    className="text-xs border rounded px-2 py-1"
+                                                                >
+                                                                    <option value="pending">Pending</option>
+                                                                    <option value="done">Done</option>
+                                                                    <option value="rejected">Rejected</option>
+                                                                </select>
+                                                                <button type="submit" className="ml-2 text-blue-600 text-xs underline">
+                                                                    Update
+                                                                </button>
+                                                            </form>
                                                         </td>
                                                     </tr>
                                                 ))}
@@ -252,7 +250,7 @@ const getActiveExperts = async () => {
                                             <tbody>
                                                 {pendingQueryData.map((booking) => (
                                                     <tr key={booking.id} className="border-b">
-                                                        <td className="py-2">{booking.f_name +" "+booking.l_name }</td>
+                                                        <td className="py-2">{booking.f_name + " " + booking.l_name}</td>
                                                         <td className="py-2">{booking.mobile_no}</td>
                                                         <td className="py-2">{booking.email}</td>
                                                         <td className="py-2">{booking.query_name}</td>
@@ -271,36 +269,36 @@ const getActiveExperts = async () => {
                                                             </span>
                                                         </td>
                                                         <td className="py-2">
-                                                        <form
-  onSubmit={async (e) => {
-    e.preventDefault();
-    const newStatus = e.target.elements.status.value;
-    try {
-      const res = await fetch(`http://localhost:5000/query/update/${booking._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `bearer ${localStorage.getItem("token")}`,
-        // authorization: `bearear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY4MDM0Y2VhYmFjNmFjZmU2M2FlZjE4ZiIsImVtYWlsIjoicmRzQHIuY29tIiwiZG9jIjpbXSwiaGlzdG9yeSI6W10sIl9fdiI6MCwiZGF0ZSI6IjIwMjUtMDQtMTlUMTI6MzU6MDAuMTMyWiJ9LCJpYXQiOjE3NDUwNjYxMDAsImV4cCI6MTc0NTA3MzMwMH0.mtgRmBD18O2VHSpPv10TVDTSLYl5pksDIMf_Ngm1vWQ`
-        },
-        body: JSON.stringify({ status: newStatus }),
-      });
-      const result = await res.json();
-      if (result.success) {
-        getPendingQuery();
-      }
-    } catch (err) {
-      console.error("Error updating query status:", err);
-    }
-  }}
->
-  <select name="status" defaultValue={booking.status} className="text-xs border rounded px-2 py-1">
-    <option value="pending">Pending</option>
-    <option value="done">Resolved</option>
-    <option value="rejected">Rejected</option>
-  </select>
-  <button type="submit" className="ml-2 text-blue-600 text-xs underline">Update</button>
-</form>
+                                                            <form
+                                                                onSubmit={async (e) => {
+                                                                    e.preventDefault();
+                                                                    const newStatus = e.target.elements.status.value;
+                                                                    try {
+                                                                        const res = await fetch(`http://localhost:5000/query/update/${booking._id}`, {
+                                                                            method: "PUT",
+                                                                            headers: {
+                                                                                "Content-Type": "application/json",
+                                                                                authorization: `bearer ${localStorage.getItem("token")}`,
+                                                                                // authorization: `bearear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY4MDM0Y2VhYmFjNmFjZmU2M2FlZjE4ZiIsImVtYWlsIjoicmRzQHIuY29tIiwiZG9jIjpbXSwiaGlzdG9yeSI6W10sIl9fdiI6MCwiZGF0ZSI6IjIwMjUtMDQtMTlUMTI6MzU6MDAuMTMyWiJ9LCJpYXQiOjE3NDUwNjYxMDAsImV4cCI6MTc0NTA3MzMwMH0.mtgRmBD18O2VHSpPv10TVDTSLYl5pksDIMf_Ngm1vWQ`
+                                                                            },
+                                                                            body: JSON.stringify({ status: newStatus }),
+                                                                        });
+                                                                        const result = await res.json();
+                                                                        if (result.success) {
+                                                                            getPendingQuery();
+                                                                        }
+                                                                    } catch (err) {
+                                                                        console.error("Error updating query status:", err);
+                                                                    }
+                                                                }}
+                                                            >
+                                                                <select name="status" defaultValue={booking.status} className="text-xs border rounded px-2 py-1">
+                                                                    <option value="pending">Pending</option>
+                                                                    <option value="done">Resolved</option>
+                                                                    <option value="rejected">Rejected</option>
+                                                                </select>
+                                                                <button type="submit" className="ml-2 text-blue-600 text-xs underline">Update</button>
+                                                            </form>
                                                         </td>
                                                     </tr>
                                                 ))}

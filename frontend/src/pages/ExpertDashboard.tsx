@@ -56,38 +56,38 @@ const ExpertDashboard = () => {
 
     const handleAcceptService = async (serviceId) => {
         try {
-          const res = await fetch(`http://localhost:5000/service/update/${serviceId}`, {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            //   authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
-              authorization: `bearear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY4MDM0Y2VhYmFjNmFjZmU2M2FlZjE4ZiIsImVtYWlsIjoicmRzQHIuY29tIiwiZG9jIjpbXSwiaGlzdG9yeSI6W10sIl9fdiI6MCwiZGF0ZSI6IjIwMjUtMDQtMTlUMTU6NTU6MTYuNzg3WiJ9LCJpYXQiOjE3NDUwNzgxMTYsImV4cCI6MTc0NTA4NTMxNn0.UoAD-E40rxnZCG5Sr38Q8nx7HeiUrLcinABMp2cBoew`,
-            },
-            body: JSON.stringify({ expert_id: '6803303885661ad3ef87f7a5' }),
-          });
-      
-          const result = await res.json();
-          if (result) {
-            toast({
-                title: "Service accepted successfully!",
-              });
-            getPendingServices();
-          } else {
-            toast({
-                title: "Failed to accept the service.",
-              });
-          }
+            const res = await fetch(`http://localhost:5000/service/update/${serviceId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    //   authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+                    authorization: `bearear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY4MDM0Y2VhYmFjNmFjZmU2M2FlZjE4ZiIsImVtYWlsIjoicmRzQHIuY29tIiwiZG9jIjpbXSwiaGlzdG9yeSI6W10sIl9fdiI6MCwiZGF0ZSI6IjIwMjUtMDQtMTlUMTU6NTU6MTYuNzg3WiJ9LCJpYXQiOjE3NDUwNzgxMTYsImV4cCI6MTc0NTA4NTMxNn0.UoAD-E40rxnZCG5Sr38Q8nx7HeiUrLcinABMp2cBoew`,
+                },
+                body: JSON.stringify({ expert_id: '6803303885661ad3ef87f7a5' }),
+            });
+
+            const result = await res.json();
+            if (result) {
+                toast({
+                    title: "Service accepted successfully!",
+                });
+                getPendingServices();
+            } else {
+                toast({
+                    title: "Failed to accept the service.",
+                });
+            }
         } catch (err) {
-          console.error(err);
-          toast({
-            title: "Something went wrong.",
-          });
+            console.error(err);
+            toast({
+                title: "Something went wrong.",
+            });
         }
-      };
-      
-      const handleDoneClick = (taskId) => {
+    };
+
+    const handleDoneClick = (taskId) => {
         navigate(`/expert/update-service/${taskId}`);
-      };
+    };
 
     useEffect(() => {
         getPendingServices();
@@ -203,7 +203,7 @@ const ExpertDashboard = () => {
                                                             <div className="mt-2 flex gap-4">
                                                                 <button
                                                                     className="bg-blue-500 text-white px-3 py-1 rounded"
-                                                                    // onClick={() => handleShowDetails(service)}
+                                                                // onClick={() => handleShowDetails(service)}
                                                                 >
                                                                     Show Details
                                                                 </button>
@@ -295,8 +295,6 @@ const ExpertDashboard = () => {
                             </CardContent>
                         </Card>
                     </TabsContent>
-
-
                 </Tabs>
             </main>
         </div>
