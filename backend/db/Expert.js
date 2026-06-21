@@ -4,7 +4,7 @@ const expertSchema = new mongoose.Schema({
   name: String,
   govt_id: {
     type: String,
-    // required:true,
+    // required: true,
     unique: true
   },
   dept: String,
@@ -12,7 +12,7 @@ const expertSchema = new mongoose.Schema({
   gender: String,
   mobile_no: {
     type: String,
-    // required:true,
+    // required: true,
   },
   email: {
     type: String,
